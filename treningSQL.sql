@@ -97,10 +97,11 @@ NOT NULL GROUP BY manager_id
 ORDER BY MIN(salary) DESC, manager_id ASC   
 
 --Vypíšte id oddelenia a súčet platov za dané oddelenie (podľa súčtu vzostupne)
-SELECT department_id, SUM(salary) sucet 
+SELECT department_id, SUM(salary) 'sucet' 
 FROM employees 
+WHERE department_id IS NOT NULL
 GROUP BY department_id 
-ORDER BY sucet ASC   
+ORDER BY sucet ASC
 
 --Vypíšte profesie a ich priemerny plat, okrem profesie programátor (podľa job_id vzostupne)
 SELECT job_id, AVG(salary) priemer 
@@ -388,3 +389,5 @@ NOT BETWEEN 2000 AND 3000
 AND zam.manager_id is not null 
 AND l.state_province = 'California' 
 ORDER BY zam.manager_id ASC, zam.employee_id
+
+--Vypíšte meno zamestnanca, ktorý ma v mene b aj c (podľa employee_id vzostupne) 
