@@ -153,7 +153,7 @@ ORDER BY e.employee_id ASC
 SELECT job_title, first_name, salary-min_salary 'Salary - Min_Salary' 
 FROM employees 
 JOIN jobs 
-ORDER BY employee_id ASC   
+ORDER BY employee_id ASC  
 
 --Vypíšte meno, priezvisko, id oddelenia a názov oddelenia v ktorom pracuje (podľa employee_id vzostupne)
 SELECT first_name, last_name, department_id, department_name 
