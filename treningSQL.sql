@@ -350,7 +350,8 @@ SELECT d.department_name, count(e.employee_id) AS 'employees_amount'
 FROM departments d
 INNER JOIN employees e ON e.department_id = d.department_id 
 GROUP BY d.department_name
-ORDER BY count(e.employee_id) DESC
+ORDER BY count(e.employee_id) DESC, d.department_name
+
 
 --Vypíš názov mesta v ktorom pracuje zamestnanec, ktorého telefónne číslo končí na 1, zoradené podľa id zamestnanca 
 SELECT city 
@@ -370,3 +371,20 @@ WHERE e.department_id = 50 AND e.employee_id % 2 = 0
 SELECT round(((j1.max_salary + j1.min_salary) / 2) - ((j2.max_salary + j2.min_salary) / 2), 4) AS vysledok
 FROM jobs j1, jobs j2
 WHERE j1.job_title = 'President' AND j2.job_title = 'Programmer'
+
+--Vypíš zamestnanca, ktorý nemá plat medzi 2000 a 3000 a jeho manažér, ktorý nie je null , pochádza z Californie . Formát výstupu :zam.first_name as "meno_zamestnanca" , zam.last_name as "priezvisko_zamestnanca" , zam.salary as "plat_zamestnanca" , zam.manager_id as "id_manazera" , man.first_name as "meno_manazera" , man.last_name as "priezvisko_manazera" 
+SELECT zam.first_name as "meno_zamestnanca", 
+zam.last_name as "priezvisko_zamestnanca",
+zam.salary as "plat_zamestnanca", 
+zam.manager_id as "id_manazera", 
+man.first_name as "meno_manazera" , 
+man.last_name as "priezvisko_manazera" 
+FROM employees zam 
+JOIN employees man ON(zam.manager_id = man.employee_id) 
+JOIN departments d ON (man.department_id = d.department_id) 
+JOIN locations l ON (d.location_id = l.location_id) 
+WHERE zam.salary 
+NOT BETWEEN 2000 AND 3000 
+AND zam.manager_id is not null 
+AND l.state_province = 'California' 
+ORDER BY zam.manager_id ASC, zam.employee_id
