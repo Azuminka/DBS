@@ -150,10 +150,10 @@ WHERE (DATEDIFF(now(), hire_date))>500
 ORDER BY e.employee_id ASC   
 
 --Vypíšte názov pozície, meno a rozdie medzi jeho platom a minimálnym platom pre jeho pozíciu (podľa employee_id vzostupne)
-SELECT job_title, first_name, salary-min_salary 'Salary - Min_Salary' 
-FROM employees 
-JOIN jobs 
-ORDER BY employee_id ASC  
+SELECT job_title, first_name, salary-min_salary 'salary - min_salary'
+FROM employees
+JOIN jobs USING (job_id)
+ORDER BY employee_id ASC
 
 --Vypíšte meno, priezvisko, id oddelenia a názov oddelenia v ktorom pracuje (podľa employee_id vzostupne)
 SELECT first_name, last_name, department_id, department_name 
